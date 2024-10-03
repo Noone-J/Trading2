@@ -96,4 +96,18 @@ Enfin, elle retourne la valeur totale de tous les portefeuilles du trader.
 
         return $valeurTotale;
     }
+
+    public function listerToutesLesActionsPossedees():array {
+        $actionPosserdees = [];
+        foreach ($this->portefeuilles as $portefeuille){
+            foreach ($portefeuille->getActions() as $action){
+                $symbole = $action->getSymbole();
+                if (!isset($actionPosserdees[$symbole])) {
+                    $actionPosserdees[$symbole] = $action;
+                }
+            }
+        }
+        return array_values($actionPosserdees);
+    }
+
 }
